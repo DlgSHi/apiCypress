@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+.browser-preferences/
+.idea
+yarn.lock
+lib
+src/style-config/assets.scss
+cypress/fixtures/example*
+cypress/screenshots
+.vscode/

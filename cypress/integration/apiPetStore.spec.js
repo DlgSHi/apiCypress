@@ -1,114 +1,63 @@
-describe('data for Dog in PetStore using GET', () => {
+const url = Cypress.config().baseURL;
 
-  const url = Cypress.config().baseURL;
+beforeEach(() => {
+	cy.server();
+});
 
-    beforeEach(() => {
-        cy.server()
-        cy.request('GET', `${url}99`).as('dog');
-        cy.log('@dog');
-    });
+describe('get newly added Pet', () => {
 
-    it('Validate the headers', () => {
-        cy.get('@dog')
-            .its('headers')
-            .its('content-type')
-            .should('include', 'application/json');
-    });
+	beforeEach(() => {
+		cy.fixture('pets.json').then(($json) => {
+			$json.forEach(function (obj) {
+				cy.request({
+					method: 'GET',
+					url: `${url}${obj.id}`
+				}).as(`pet${obj.id}`);
+			})
+		});
+	});
 
-    it('Validate the status code', () => {
-        cy.get('@dog')
-            .its('status')
-            .should('equal', 200);
-    });
+	it('Validate the headers', () => {
+		cy.get('@pet773')
+			.its('headers')
+			.its('content-type')
+			.should('include', 'application/json');
+		cy.get('@pet774')
+			.its('headers')
+			.its('content-type')
+			.should('include', 'application/json');
+	});
 
-    it('Validate the dog\'s name', () => {
-        cy.get('@dog')
-            .its('body')
-            .should('include', { name: 'DoggiePG' });
-    });
+	it('Validate the status code', () => {
+		cy.get('@pet773')
+			.its('status')
+			.should('equal', 200);
+		cy.get('@pet774')
+			.its('status')
+			.should('equal', 200);
+	});
 
-    it('Validate the dog\'s name', () => {
-      cy.get('@dog')
-          .its('body')
-          .should('include', { status: 'available' });
-  });
-})
+	it('Validate the KittyCatPG\'s name', () => {
+		cy.get('@pet773')
+					.its('body')
+					.should('include', { name: 'KittyCatPG' });
+	});
 
-describe('add new Pet', () => {
+	it('Validate the ElephantPG\'s name', () => {
+		cy.get('@pet774')
+					.its('body')
+					.should('include', { name: 'ElephantPG' });
+	});
 
-  const url = Cypress.config().baseURL;
+	it('Validate the KittyCatPG\'s status', () => {
+		cy.get('@pet773')
+		.its('body')
+		.should('include', { status: 'sold' });
+	});
 
-    beforeEach(() => {
-        cy.server()
-        cy.request({
-          method: 'POST',
-          url: url,
-          body: {
-              'id': 773,
-              'name': 'KittyCatPG',
-              'status': 'sold'
-          }}).as('kitty');
-        cy.log('@kitty');
-    });
-
-    it('Validate the headers', () => {
-        cy.get('@kitty')
-            .its('headers')
-            .its('content-type')
-            .should('include', 'application/json');
-    });
-
-    it('Validate the status code', () => {
-      cy.get('@kitty')
-          .its('status')
-          .should('equal', 200);
-    });
-
-    it('Validate the kitty\'s name', () => {
-      cy.get('@kitty')
-          .its('body')
-          .should('include', { name: 'KittyCatPG' });
-    });
-
-    it('Validate the kitty\'s name', () => {
-    cy.get('@kitty')
-        .its('body')
-        .should('include', { status: 'sold' });
-    });
-})
-
-describe('get new added Pet', () => {
-
-  const url = Cypress.config().baseURL;
-
-    beforeEach(() => {
-        cy.server()
-        cy.request('GET', `${url}773`).as('kitty');
-        cy.log('@kitty');
-    });
-
-    it('Validate the headers', () => {
-        cy.get('@kitty')
-            .its('headers')
-            .its('content-type')
-            .should('include', 'application/json');
-    });
-
-    it('Validate the status code', () => {
-      cy.get('@kitty')
-          .its('status')
-          .should('equal', 200);
-    });
-
-    it('Validate the kitty\'s name', () => {
-      cy.get('@kitty')
-          .its('body')
-          .should('include', { name: 'KittyCatPG' });
-    });
-
-    it('Validate the kitty\'s name', () => {
-    cy.get('@kitty')
-        .its('body')
-        .should('include', { status: 'sold' });
-    });
+	it('Validate the ElephantPG\'s status', () => {
+		cy.get('@pet774')
+		.its('body')
+		.should('include', { status: 'available' });
+	});
 })

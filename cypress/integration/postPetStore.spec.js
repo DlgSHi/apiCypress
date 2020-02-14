@@ -1,18 +1,10 @@
 describe('add new Pet', () => {
 
-  const url = Cypress.config().baseURL;
-
   before(() => {
-    cy.server();
     cy.fixture('pets.json').then(($json) => {
       $json.forEach(function (obj) {
-        cy.request({
-          method: 'POST',
-          url: url,
-          body: obj
-        }).as('pets');
+        cy.postApi(obj).as('pets');
       })
-
     })
   });
 

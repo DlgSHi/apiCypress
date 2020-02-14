@@ -1,18 +1,17 @@
-const url = Cypress.config().baseURL;
-
-beforeEach(() => {
-	cy.server();
-});
-
 describe('get newly added Pet', () => {
+
+  before(() => {
+    cy.fixture('pets.json').then(($json) => {
+			$json.forEach(function (obj) {
+				cy.postApi(obj);
+			})
+		});
+  });
 
 	beforeEach(() => {
 		cy.fixture('pets.json').then(($json) => {
 			$json.forEach(function (obj) {
-				cy.request({
-					method: 'GET',
-					url: `${url}${obj.id}`
-				}).as(`pet${obj.id}`);
+				cy.getApi(obj.id).as(`pet${obj.id}`);
 			})
 		});
 	});

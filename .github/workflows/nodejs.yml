@@ -1,18 +1,20 @@
-name: Node.js CI
+name: Cypress api tests
 
 on: [push]
 
 jobs:
-  build:
-
+  test:
+    name: Cypress run
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [8.x]
+        ci_node_total: [4]
+        ci_node_index: [0, 1, 2, 3]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:

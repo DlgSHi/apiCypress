@@ -5,6 +5,5 @@ node_modules/
 yarn.lock
 lib
 src/style-config/assets.scss
-cypress/fixtures/example*
 cypress/screenshots
 .vscode/

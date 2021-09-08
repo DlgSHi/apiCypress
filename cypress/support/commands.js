@@ -9,17 +9,40 @@
 // ***********************************************
 //
 //
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.on('uncaught:exception', (err, runnable) => false);
+
+const url = Cypress.config().baseURL;
+
+before(() => {
+  cy.server();
+})
+
+Cypress.Commands.add('postApi', (body) => {
+  cy.request({
+    method: 'POST',
+    url: url,
+    body: body
+  });
+});
+
+Cypress.Commands.add('getApi', (id) => {
+  cy.request({
+    method: 'GET',
+    url: `${url}${id}`
+  });
+});
+
+Cypress.Commands.add('putApi', (body) => {
+  cy.request({
+    method: 'PUT',
+    url: url,
+    body: body
+  });
+});
+
+Cypress.Commands.add('deleteApi', (id) => {
+  cy.request({
+    method: 'DELETE',
+    url: `${url}${id}`,
+  });
+});

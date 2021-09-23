@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://petstore.swagger.io/v2/pet/",
+  "baseURL": "https://petstore.swagger.io/v2/pet/",
   "blockHosts": ["www.google-analytics.com", "sockjs*", "countries*"],
   "env": { "TAGS": "not @ignore" },
   "failOnStatusCode": false,

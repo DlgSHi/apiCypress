@@ -2,6 +2,7 @@ describe('API Testing with Cypress', () => {
     const url = 'https://pokeapi.co/api/v2/pokemon';
 
     beforeEach(() => {
+        cy.server()
         cy.request('GET', `${url}/25`).as('pikachu');
         cy.log('@pikachu');
     });

@@ -1,5 +1,6 @@
+/// <reference types="cypress" />
 // ***********************************************************
-// This example support/index.js is processed and
+// This example support/e2e.ts is processed and
 // loaded automatically before your test files.
 //
 // This is a great place to put global configuration and
@@ -18,3 +19,4 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+

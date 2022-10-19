@@ -7,28 +7,28 @@ declare global {
        * cy.postApi(body)
        * @param {Object} body - body object to create a Pet
        */
-      postApi(body: object): Chainable<any>
+      postApi(body: object): any
       /**
        * Update pet using PUT method
        * @example
        * cy.putApi(body)
        * @param {Object} body - body object to create a Pet
        */
-      putApi(body: object): Chainable<any>
+      putApi(body: object): any
       /**
        * Get pet by ID using GET method
        * @example
        * cy.getApi(id)
        * @param {Number} ID - Pet's ID
       */
-      getApi(id: Number): Chainable<any>
+      getApi(id: Number): any
       /**
        * Delete pet using DELETE method
        * @example
        * cy.deleteApi(id)
        * @param {Number} ID - Pet's ID
       */
-      deleteApi(id: Number): Chainable<any>
+      deleteApi(id: Number): any
     }
   }
 }

@@ -2,9 +2,7 @@ describe('add new Pet', () => {
 
   before(() => {
     cy.fixture('pets.json').then(($json) => {
-      $json.forEach(function (obj) {
-        cy.postApi(obj).as('pets');
-      })
+        cy.postApi($json).as('pets');
     })
   });
 

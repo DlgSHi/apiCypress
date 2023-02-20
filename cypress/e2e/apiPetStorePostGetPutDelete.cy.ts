@@ -1,3 +1,4 @@
+// @ts-nocheck
 // test data
 const obj = {
   "id": 221,
